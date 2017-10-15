@@ -18,10 +18,7 @@ def main():
 			description = description.split(".,")
 			description = description[0]
 			description = description.replace("\"","")
-			print(line)
-			print("\\n,{},{},{}\n".format(rankTitle[0],rankTitle[1], description))
-			print("----------------------")
-			#out1.write("\\n,{},{},{},{},{}\n".format(line[0],line[1],line[3],line[9],line[11]))
+			out1.write("\\n,{},{},{}\n".format(rankTitle[0],rankTitle[1], description))
 
 		out1.close()
 
