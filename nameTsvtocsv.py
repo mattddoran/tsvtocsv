@@ -4,8 +4,8 @@
 
 def main():
 
-	out1 = open("nameBasic.txt", "a")
-	out2 = open("nameProfession.txt", "a")
+	out1 = open("nameBasic.csv", "a")
+	out2 = open("nameProfession.csv", "a")
 
 	with open("nameTest.txt", "r") as f:
 		for line in f.readlines()[1:]:

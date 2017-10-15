@@ -4,16 +4,16 @@
 
 def main():
 
-	out1 = open("metadataBasic.txt", "a")
-	out2 = open("metadataKeyword.txt", "a")
-	out3 = open("nameFBLikes.txt", "a")
+	out1 = open("metadataBasic.csv", "a")
+	out2 = open("metadataKeyword.csv", "a")
+	out3 = open("nameFBLikes.csv", "a")
 
 	with open("metadataTest.txt", "r") as f:
 		for line in f.readlines()[1:]:
 			# extract metadata fields (color, directorfblikes, gross, title, castfblikes, imdblink, language, country, content-rating, budget, imdbscore, aspectratio, movielikes)
 			line = line.split(",")
 			keywords  = line[16]
-			out1.write("\\n,{},{},{},{},{},{},{},{},{},{},{},{},{}\n".format(line[0],line[4],line[8],line[11],line[13],line[17],line[18],line[19],line[20],line[21],line[23],line[24],line[25]))
+			out1.write("\\n,{},{},{},{},{},{},{},{},{},{},{},{},{}".format(line[0],line[4],line[8],line[11],line[13],line[17],line[19],line[20],line[21],line[22],line[25],line[26],line[27]))
 
 			# keywords
 			out2.write("\\n,")

@@ -1,4 +1,11 @@
-\n,Color,0,760505847,Avatar ,4834,http://www.imdb.com/title/tt0499549/?ref_=fn_tt_tt_1,3054,English,USA,PG-13,2009,936,7.9
-\n,Color,563,309404152,Pirates of the Caribbean: At World's End ,48350,http://www.imdb.com/title/tt0449088/?ref_=fn_tt_tt_1,1238,English,USA,PG-13,2007,5000,7.1
-\n,Color,0,200074175,Spectre ,11700,http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1,994,English,UK,PG-13,2015,393,6.8
-\n,Color,22000,448130642,The Dark Knight Rises ,106759,http://www.imdb.com/title/tt1345836/?ref_=fn_tt_tt_1,2701,English,USA,PG-13,2012,23000,8.5
+\n,Color,0,760505847,Avatar ,4834,http://www.imdb.com/title/tt0499549/?ref_=fn_tt_tt_1,English,USA,PG-13,237000000,7.9,1.78,33000
+
+\n,Color,563,309404152,Pirates of the Caribbean: At World's End ,48350,http://www.imdb.com/title/tt0449088/?ref_=fn_tt_tt_1,English,USA,PG-13,300000000,7.1,2.35,0
+
+\n,Color,0,200074175,Spectre ,11700,http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1,English,UK,PG-13,245000000,6.8,2.35,85000
+
+\n,Color,22000,448130642,The Dark Knight Rises ,106759,http://www.imdb.com/title/tt1345836/?ref_=fn_tt_tt_1,English,USA,PG-13,250000000,8.5,2.35,164000
+\n,Color,0,760505847,Avatar ,4834,http://www.imdb.com/title/tt0499549/?ref_=fn_tt_tt_1,English,USA,PG-13,237000000,7.9,1.78,33000
+\n,Color,563,309404152,Pirates of the Caribbean: At World's End ,48350,http://www.imdb.com/title/tt0449088/?ref_=fn_tt_tt_1,English,USA,PG-13,300000000,7.1,2.35,0
+\n,Color,0,200074175,Spectre ,11700,http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1,English,UK,PG-13,245000000,6.8,2.35,85000
+\n,Color,22000,448130642,The Dark Knight Rises ,106759,http://www.imdb.com/title/tt1345836/?ref_=fn_tt_tt_1,English,USA,PG-13,250000000,8.5,2.35,164000

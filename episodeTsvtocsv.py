@@ -4,7 +4,7 @@
 
 def main():
 
-	out1 = open("episodeBasic.txt", "a")
+	out1 = open("episodeBasic.csv", "a")
 
 	with open("episodeTest.txt", "r") as f:
 		for line in f.readlines()[1:]:

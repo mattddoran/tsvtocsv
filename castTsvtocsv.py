@@ -4,7 +4,7 @@
 
 def main():
 
-	out1 = open("castBasic.txt", "a")
+	out1 = open("castBasic.csv", "a")
 
 	with open("castTest.txt", "r") as f:
 		for line in f.readlines()[1:]:

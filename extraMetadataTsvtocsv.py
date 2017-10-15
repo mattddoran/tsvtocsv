@@ -4,7 +4,7 @@
 
 def main():
 
-	out1 = open("extraMetadataBasic.txt", "a")
+	out1 = open("extraMetadataBasic.csv", "a")
 
 	with open("extraMetadataTest.txt", "r") as f:
 		for line in f.readlines()[1:]:
