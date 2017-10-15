@@ -1,5 +1,0 @@
-nconst	primaryName	birthYear	deathYear	primaryProfession	knownForTitles
-nm0000001	Fred Astaire	1899	1987	soundtrack,actor,miscellaneous	tt0050419,tt0120689,tt0027125,tt0028333
-nm0000002	Lauren Bacall	1924	2014	actress,soundtrack	tt0038355,tt0040506,tt0055688,tt0037382
-nm0000003	Brigitte Bardot	1934	\N	actress,soundtrack,producer	tt0049189,tt0059956,tt0063715,tt0057345
-nm0000004	John Belushi	1949	1982	actor,writer,soundtrack	tt0072562,tt0080455,tt0078723,tt007797
