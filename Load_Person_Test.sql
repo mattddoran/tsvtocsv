@@ -1,6 +1,6 @@
-LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\IMDB-AWS\\IMBD-AWS\\uploadPerson.csv"
+LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\nameBasic.csv"
 INTO TABLE mydb.person
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
 LINES TERMINATED BY '\r\n' STARTING BY ''
-IGNORE 1 LINES;
+IGNORE 0 LINES;
 
