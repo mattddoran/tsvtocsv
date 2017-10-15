@@ -1,0 +1,12 @@
+CCH Pounder,1000
+Joel David Moore,936
+Wes Studi,855
+Johnny Depp,40000
+Orlando Bloom,5000
+Jack Davenport,1000
+Christoph Waltz,11000
+Rory Kinnear,393
+Stephanie Sigman,161
+Tom Hardy,27000
+Christian Bale,23000
+Joseph Gordon-Levitt,23000
