@@ -21,8 +21,8 @@ def main():
 			out2.write(line2[0]+",")
 			out2.write(line2[8])
 			inc+=1
-			if(inc > 100000):
-				break
+			#if(inc > 100000):
+				#break
 
 		out1.close()
 		out2.close()
