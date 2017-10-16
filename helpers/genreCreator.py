@@ -4,6 +4,8 @@
 def main():
 
 	out = open("titleGenreId.csv", "a")
+	out2 = open("genreId.csv", "a")
+
 	with open("titleGenre.csv", "r") as f:
 		genreDict = {}
 		i = 1
@@ -18,5 +20,9 @@ def main():
 					i += 1
 				out.write("{},{}\n".format(title, genreDict[genre]))
 
+		for k, v in genreDict.iteritems():
+			out2.write("{},{}\n".format(v, k))
+
 		out.close()
+		out2.close()
 main()
