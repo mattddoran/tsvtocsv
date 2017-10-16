@@ -3,21 +3,20 @@
 
 def main():
 
-	out = open("genres.csv", "a")
+	out = open("titleGenreId.csv", "a")
 	with open("titleGenre.csv", "r") as f:
 		genreDict = {}
 		i = 1
 		for line in f.readlines():
-			print(line)
 			genres = line.split(",")
+			title = genres[0]
 			genres = genres[1:]
-			genres[len(genres)-1] = genres[len(genres)-1][:-1] # shave off newline
+			genres[len(genres)-1] = genres[len(genres)-1][:-1] # shave off newline (could have just used .replace)
 			for genre in genres:
 				if genre not in genreDict:
 					genreDict[genre] = i
 					i += 1
-			print genreDict
+				out.write("{},{}\n".format(title, genreDict[genre]))
 
-		out.write(str(genreDict))
 		out.close()
 main()
