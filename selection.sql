@@ -1,5 +1,8 @@
 select *
-from mydb2.episode
-where idTitle > 119000;
+from mydb2.titlegenres;
 
-delete from mydb2.rating where Title_idTitle > -1
+
+delete from mydb2.titlegenres;
+delete from mydb2.genres;
+
+set sql_safe_updates = 1;

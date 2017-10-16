@@ -1,6 +1,6 @@
 # Matthew Doran
 # create dictionary of all genres
-
+import re
 def main():
 
 	out = open("titleGenreId.csv", "a")
@@ -10,9 +10,11 @@ def main():
 		genreDict = {}
 		i = 1
 		for line in f.readlines():
-			genres = line.split(",")
-			title = genres[0]
+			genres = re.split(' |,',line)
+			title = genres[0][2:]
 			genres = genres[1:]
+			#for genre in genres:
+                         #       genre = genre.split(" ")
 			genres[len(genres)-1] = genres[len(genres)-1][:-1] # shave off newline (could have just used .replace)
 			for genre in genres:
 				if genre not in genreDict:
