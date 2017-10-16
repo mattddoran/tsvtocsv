@@ -1,5 +1,6 @@
 # Matthew Doran
 # create dictionary of all genres
+# problems in file creation???
 import re
 def main():
 
