@@ -5,24 +5,28 @@
 def main():
 
         out1 = open("Cast_has_Person.csv", "w")
-        inc = 0
+        out2 = open("Cast.csv", "w")
         with open("BIG_FILE_cast.tsv", "r") as f:
-
+                iDWriter = 6
+                iDDirector = 7
                 for line in f.readlines()[1:]:
-                        # convert entire line minus professions/titles to csv
                         line1 = line.split("\t")
-                        line1[0] = line1[0][2:]
-                        out1.write("{},{},{},{},\\N\n".format(line1[0],line1[1],line1[2],line1[3]))
+                        castID = line1[0][2:]
+                        out2.write("{}\n".format(castID))
+                        directors = line1[1].split(",")
+                        writers = line1[2].split(",")
+                        for director in directors:
+                                num = len(director)
+                                director = director[2:]
+                                if num > 2:
+                                        out1.write("{},{},{}\n".format(castID,director,iDDirector))
+                        for writer in writers:
+                                num = len(writer) - 1
+                                writer = writer[2:num]
+                                if num > 2:
+                                        out1.write("{},{},{}\n".format(castID,writer,iDWriter))
 
-                        # nconst + professions
-                        line2 = line.split("\t")
-                        out2.write(line2[0]+",")
-                        out2.write(line2[4]+"\n")
-                        inc+=1
-                        #if(inc > 100000):
-                                #break
 
                 out1.close()
-                out2.close()
 
 main()
