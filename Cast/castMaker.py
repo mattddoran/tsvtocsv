@@ -1,13 +1,12 @@
-# Matthew Doran
+# Carl Fee
 # tsv to csv script
 #
 
 def main():
 
-        out1 = open("nameBasic.csv", "w")
-        out2 = open("nameProfession.csv", "w")
+        out1 = open("Cast_has_Person.csv", "w")
         inc = 0
-        with open("BIG_FILE_Person.tsv", "r") as f:
+        with open("BIG_FILE_cast.tsv", "r") as f:
 
                 for line in f.readlines()[1:]:
                         # convert entire line minus professions/titles to csv
