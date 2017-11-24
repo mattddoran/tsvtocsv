@@ -33,6 +33,18 @@ group by genres.idGenre
 order by sum(rating.numVotes) Desc;
 
 
+/* SET SQL_SAFE_UPDATES = 0;
+delete  
+from cast_has_person_with_profession;
+SET SQL_SAFE_UPDATES = 1; */
+
+select * 
+from title
+where idTitle = 9;
+
+-- Todo
+/*update deathYear = 1941, 
+where idPerson = 1695194;*/
 
 
 /*select genres.genre, count(*) as 'Number of Titles', sum(rating.numVotes) as 'Sum of votes for all Titles in this Genre' -- distinct genres.genre

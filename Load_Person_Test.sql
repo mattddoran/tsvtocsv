@@ -34,7 +34,29 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
 LINES TERMINATED BY '\r\n' STARTING BY ''
 IGNORE 0 LINES;
 
+LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\helpers\\PersonProfessions.csv"
+INTO TABLE mydb2.personprofessions
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
+LINES TERMINATED BY '\r\n' STARTING BY ''
+IGNORE 0 LINES;
 
+LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\helpers\\Profession.csv"
+INTO TABLE mydb2.profession
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
+LINES TERMINATED BY '\r\n' STARTING BY ''
+IGNORE 0 LINES;
+
+LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\Cast\\Cast.csv"
+INTO TABLE mydb2.cast
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
+LINES TERMINATED BY '\r\n' STARTING BY ''
+IGNORE 0 LINES;
+
+LOAD DATA LOCAL INFILE "C:\\Users\\cfee\\git\\tsvtocsv\\Cast\\Cast_has_Person.csv"
+INTO TABLE mydb2.cast_has_person_with_profession
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\'
+LINES TERMINATED BY '\r\n' STARTING BY ''
+IGNORE 0 LINES;
 
 
 
