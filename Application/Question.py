@@ -8,10 +8,10 @@ class Question(Visualization,Analysis,Query):
         self.data = data
 
     def displayImage(self):
-        print "Matt is so cool"
+        print ("Matt is so cool")
 
     def displayAnalysis(self):
-        print "Movies are hip"
-        
+        print ("Movies are hip")
+
     def userFilter(self):
-        print "Treat your self"
+        print ("Treat your self")

@@ -1,8 +1,8 @@
 import importlib
-# import numpy as np
-# import matplotlib
-# import matplotlib.pyplot as plt
-#import mysql.connector
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import mysql.connector
 from Question import Question
 
 def run():
