@@ -1,8 +1,9 @@
 import importlib
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-
+# import numpy as np
+# import matplotlib
+# import matplotlib.pyplot as plt
+#import mysql.connector
+from Question import Question
 
 def run():
     m = 0
@@ -26,14 +27,43 @@ def makeInt(i):
 def coolBreeze():
     print "coolBreeze"
 
+def queryTest():
+    config = {
+        'user': 'csci440',
+        'password': 'csci440',
+        'host': '127.0.0.1',
+        'database': 'COMPANY',
+        'raise_on_warnings': True,
+    }
+
+    cnx = mysql.connector.connect(**config)
+
+    cursor = cnx.cursor()
+
+    query = ("SELECT * "
+             "FROM EMPLOYEE "
+             "WHERE employee.Super_ssn IS NOT NULL;")
+
+    cursor.execute(query)
+
+    for (Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Super_ssn, Dno) in cursor:
+        print("{}, {}".format(Fname, Lname))
+
+    cursor.close()
+
+    cnx.close()
+
 if __name__ == '__main__':
     # run()
     coolBreeze()
+    var = Question(5)
+    var.doSome()
+    var.createImage()
     # Fixing random state for reproducibility
-    np.random.seed(19680801)
-
-    matplotlib.rcParams['axes.unicode_minus'] = False
-    fig, ax = plt.subplots()
-    ax.plot(10 * np.random.randn(100), 10 * np.random.randn(100), 'o')
-    ax.set_title('Using hyphen instead of Unicode minus')
-    plt.show()
+    # np.random.seed(19680801)
+    #
+    # matplotlib.rcParams['axes.unicode_minus'] = False
+    # fig, ax = plt.subplots()
+    # ax.plot(10 * np.random.randn(100), 10 * np.random.randn(100), 'o')
+    # ax.set_title('Using hyphen instead of Unicode minus')
+    # plt.show()
