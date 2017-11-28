@@ -1,7 +1,7 @@
 import importlib
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
+# import numpy as np
+# import matplotlib
+# import matplotlib.pyplot as plt
 import mysql.connector
 from Question import Question
 
@@ -29,36 +29,37 @@ def coolBreeze():
 
 def queryTest():
     config = {
-        'user': 'csci440',
-        'password': 'csci440',
+        'user': '15cfee',
+        'password': 'Rrevolution@1',
         'host': '127.0.0.1',
-        'database': 'COMPANY',
-        'raise_on_warnings': True,
+        'database': 'MYDB2',
+        'raise_on_warnings': True
     }
 
-    cnx = mysql.connector.connect(**config)
+    cnx = mysql.connector.connect(user = '15cfee',password = 'Rrevolution@1',host = '127.0.0.1',database='TestingSamePort')
 
-    cursor = cnx.cursor()
-
-    query = ("SELECT * "
-             "FROM EMPLOYEE "
-             "WHERE employee.Super_ssn IS NOT NULL;")
-
-    cursor.execute(query)
-
-    for (Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Super_ssn, Dno) in cursor:
-        print("{}, {}".format(Fname, Lname))
-
-    cursor.close()
+    # cursor = cnx.cursor()
+    #
+    # query = ("SELECT * "
+    #          "FROM EMPLOYEE "
+    #          "WHERE employee.Super_ssn IS NOT NULL;")
+    #
+    # cursor.execute(query)
+    #
+    # for (Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Super_ssn, Dno) in cursor:
+    #     print("{}, {}".format(Fname, Lname))
+    #
+    # cursor.close()
 
     cnx.close()
 
 if __name__ == '__main__':
     # run()
     coolBreeze()
-    var = Question(5)
-    var.doSome()
-    var.createImage()
+    var = Question("Qusetion1",{2,3,4})
+    queryTest()
+    #var.doSome()
+    #var.createImage()
     # Fixing random state for reproducibility
     # np.random.seed(19680801)
     #
