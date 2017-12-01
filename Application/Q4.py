@@ -12,8 +12,9 @@ class Q4(Question):
         query =(
         "select mydb2.genres.genre, count(*) as 'Number of Titles', sum(mydb2.rating.numVotes) as 'Sum of votes for all Titles in this Genre' "
         "from mydb2.genres cross join mydb2.titlegenres cross join mydb2.title cross join mydb2.rating "
-        "where mydb2.genres.idGenre = mydb2.titlegenres.Genres_idGenre and mydb2.title.idTitle = mydb2.titlegenres.Title_idTitle and mydb2.rating.Title_idTitle = mydb2.title.idTitle and mydb2.rating.averageRating < 2 and mydb2.rating.numVotes > 10 "
-        "group by mydb2.genres.idGenre order by sum(rating.numVotes) Desc; ")
+        "where mydb2.genres.idGenre = mydb2.titlegenres.Genres_idGenre and mydb2.title.idTitle = mydb2.titlegenres.Title_idTitle "
+        "and mydb2.rating.Title_idTitle = mydb2.title.idTitle and mydb2.rating.averageRating < 2 and mydb2.rating.numVotes > 10 "
+        "group by mydb2.genres.idGenre, mydb2.title.startYear order by sum(rating.numVotes) Desc; ")
 
         # cursor.execute()
 
