@@ -10,11 +10,11 @@ class Q4(Question):
 
 
         query =(
-        "select mydb2.genres.genre, count(*) as 'Number of Titles', sum(mydb2.rating.numVotes) as 'Sum of votes for all Titles in this Genre' "
+        "select mydb2.genres.genre, mydb2.title.startYear, count(*) as 'Number of Titles' "
         "from mydb2.genres cross join mydb2.titlegenres cross join mydb2.title cross join mydb2.rating "
         "where mydb2.genres.idGenre = mydb2.titlegenres.Genres_idGenre and mydb2.title.idTitle = mydb2.titlegenres.Title_idTitle "
-        "and mydb2.rating.Title_idTitle = mydb2.title.idTitle and mydb2.rating.averageRating < 2 and mydb2.rating.numVotes > 10 "
-        "group by mydb2.genres.idGenre, mydb2.title.startYear order by sum(rating.numVotes) Desc; ")
+        "and mydb2.rating.Title_idTitle = mydb2.title.idTitle "
+        "group by mydb2.genres.idGenre, mydb2.title.startYear;")
 
         # cursor.execute()
 
@@ -23,13 +23,9 @@ class Q4(Question):
         list = []
         num = 0
         print 'executed'
-        for (isTitle, a, b) in cursor:
+        for (genre, year, count) in cursor:
             # print isTitle, a
-            # print("{}".format(isTitle))
-            num += 1
-            if (num % 1 == 0):
-                print num
-                list.append(isTitle)
+             print("{},{},{}".format(genre,year,count))
         print list
         cursor.close()
 
