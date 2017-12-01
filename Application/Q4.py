@@ -7,13 +7,6 @@ class Q4(Question):
         cnx = mysql.connector.connect(user='root', password='Rrevolution@1', host='127.0.0.1', database='mydb2')
 
         cursor = cnx.cursor(buffered=True)
-        #
-        query = ("SELECT primaryTitle,originalTitle "
-                 "FROM title "
-                 "WHERE idTitle = 9;")
-        cursor.execute(query)
-        for (isTitle, a) in cursor:
-            print isTitle
 
 
         query =(
