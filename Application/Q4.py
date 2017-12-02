@@ -20,7 +20,10 @@ class Q4(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
+            out = open(fname, "w")
             for (genre, year, count) in cursor:
-                # print isTitle, a
-                 print("{},{},{}".format(genre,year,count))
+                # convert entire line to csv
+                out.write("{},{},{}\n".format(genre, year, count))
+
+            out.close()
         print 'Finished'
