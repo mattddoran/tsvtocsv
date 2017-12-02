@@ -22,8 +22,9 @@ def main():
 			title = columns[4]
 			try:
 				newLine = titleDict[title.rstrip()] + "," + columns[3] + "," +  columns[5] + "," + columns[10] # tconst, gross, cast likes, budget
-				print(newLine)
-				out.write("{}\n".format(newLine))
+				if(titleDict[title.rstrip()] != "" and columns[3] != "" and columns[5] != "" and columns[10] != ""):
+					print(newLine)
+					out.write("{},{},{},{}\n".format(titleDict[title.rstrip()], columns[3], columns[5], columns[10]))
 				
 			except KeyError:
 				pass

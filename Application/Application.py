@@ -14,18 +14,18 @@ class Organizer(object):
     def runQ(qNumber):
         if (qNumber == 1):
             Q1.query()
+            Q1.process("query1.csv")
             return
         if (qNumber == 3):
             Q3.query()
             return
         if(qNumber == 4):
             Q4.query()
+            Q4.visualize("query4.csv")
             return
         if (qNumber == 5):
             Q5.query()
             return
-        if (qNumber == 6):
-            Q4.visualize("query4.csv")
         print "needs to be implemented"
 
 
