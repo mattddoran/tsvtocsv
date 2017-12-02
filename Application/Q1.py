@@ -1,6 +1,7 @@
 from Question import Question
 import mysql.connector
 import os.path
+import collections
 
 class Q1(Question):
     @staticmethod
@@ -27,3 +28,14 @@ class Q1(Question):
 
             out.close()
         print 'Finished'
+
+    @staticmethod
+    def process(csv):
+        l1 = collections.defaultdict(list)
+        with open(csv, "r") as f:
+            for line in f.readlines():
+                data = line.split(",")
+                if data[1] != None:
+                    l1[data[0]].append((data[1],data[2],data[3]))
+            f.close()
+        print l1
