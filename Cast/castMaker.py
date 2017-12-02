@@ -9,7 +9,7 @@ def main():
         with open("BIG_FILE_cast.tsv", "r") as f:
                 iDWriter = 6
                 iDDirector = 7
-                for line in f.readlines()[1:]:
+                for line in f.readlines()[100000:200000]:
                         line1 = line.split("\t")
                         castID = line1[0][2:]
                         out2.write("{}\n".format(castID))
