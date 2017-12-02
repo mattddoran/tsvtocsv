@@ -1,7 +1,7 @@
 import importlib
-# import numpy as np
-# import matplotlib
-# import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
 import mysql.connector
 from Question import Question
 

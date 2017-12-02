@@ -4,8 +4,8 @@
 
 def main():
 
-	out1 = open("titleBasic.csv", "a")
-	out2 = open("titleGenre.csv", "a")
+	out1 = open("titleBasic.csv", "w")
+	out2 = open("titleGenre.csv", "w")
 
 	with open("BIG_FILE_Title.tsv", "r") as f:
 		inc = 0
