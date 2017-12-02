@@ -1,6 +1,8 @@
 from Question import Question
 import mysql.connector
 import os.path
+import collections
+import matplotlib.pyplot as plt
 
 class Q4(Question):
     @staticmethod
@@ -27,3 +29,45 @@ class Q4(Question):
 
             out.close()
         print 'Finished'
+
+    @staticmethod
+    def process(csv):
+        l1 = collections.defaultdict(list)
+        #l1 = {"Documentary":[],"Short":[],"Animation":[], "Comedy":[], "Romance":[], "Sport":[], "News":[], "Drama":[], "Fantasy":[], }
+        with open(csv, 'r') as f:
+            for line in f.readlines():
+                data = line.split(',')
+                if data[1] != "None": #Ignore years recorded as "None" and populate genre dictionary with year and number of titles
+                    l1[data[0]].append((data[1], data[2].rstrip()))
+                    #l1[data[0]].append(data[2].rstrip())
+            f.close()
+        popularGenres = collections.defaultdict(int)
+        for genre in l1.keys():
+            for year in l1[genre]:
+                popularGenres[genre] += int(year[1])
+
+        popularGenres = sorted(popularGenres.items(), key=lambda(k,v): v) #Sort by most popular genres
+        print popularGenres
+        for genre in popularGenres[:20]: #remove 20 least popular genres
+            del l1[genre[0]]
+
+        return l1
+
+    @staticmethod
+    def visualize(csv):
+        l1 = Q4.process(csv)
+        genres = []
+        for genre in l1.keys():
+            genres.append(genre)
+            x = []
+            y = []
+            for year in l1[genre]:
+                if int(year[0]) < 2017 and int(year[0]) > 1960:
+                    x.append(int(year[0]))
+                    y.append(int(year[1]))
+            plt.plot(x,y) # (Year, Number of Titles)
+        plt.legend(genres, loc="upper left")
+
+        plt.show()
+
+

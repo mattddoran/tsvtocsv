@@ -16,6 +16,8 @@ class Organizer(object):
         if (qNumber == 5):
             Q5.query()
             return
+        if (qNumber == 6):
+            Q4.visualize("query4.csv")
         print "needs to be implemented"
 
 

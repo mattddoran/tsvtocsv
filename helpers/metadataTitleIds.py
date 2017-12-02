@@ -11,7 +11,7 @@ def main():
 			line = line.split(",")
 			tid = line[0]
 			tid = tid[2:]
-			title = line[2] + " "
+			title = line[2]
 			titleDict[title] = tid
 		print(str(titleDict))
 
@@ -20,9 +20,9 @@ def main():
 			columns = line.split(",")
 			title = columns[4]
 			try:
-				newLine = titleDict[title] + line[2:]
+				newLine = titleDict[title.rstrip()] + "," + columns[3] + "," +  columns[5] + "," + columns[10] # tconst, gross, cast likes, budget
 				print(newLine)
-				out.write("{}".format(newLine))
+				out.write("{}\n".format(newLine))
 				
 			except KeyError:
 				pass
