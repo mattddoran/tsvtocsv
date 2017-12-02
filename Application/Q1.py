@@ -35,7 +35,7 @@ class Q1(Question):
         with open(csv, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
-                if data[1] != None:
-                    l1[data[0]].append((data[1],data[2],data[3]))
+                if data[1] != "None":
+                    l1[data[0]].append((data[1],data[2],data[3].rstrip()))
             f.close()
         print l1
