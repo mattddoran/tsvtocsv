@@ -2,3 +2,4 @@ BIG_FILE*
 .idea*
 *.csv
 *.pyc
+!Application/*.csv
