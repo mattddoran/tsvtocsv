@@ -26,7 +26,7 @@ def main():
 					print(newLine)
 					out.write("{},{},{},{}\n".format(titleDict[title.rstrip()], columns[3], columns[5], columns[10]))
 				
-			except KeyError
+			except KeyError:
 				pass
 
 		out.close()
