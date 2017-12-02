@@ -1,3 +1,5 @@
+from Q1 import Q1
+from Q3 import Q3
 from Q4 import Q4
 from Q5 import Q5
 # acts as a facade
@@ -10,6 +12,12 @@ class Organizer(object):
 
     @staticmethod
     def runQ(qNumber):
+        if (qNumber == 1):
+            Q1.query()
+            return
+        if (qNumber == 3):
+            Q3.query()
+            return
         if(qNumber == 4):
             Q4.query()
             return
