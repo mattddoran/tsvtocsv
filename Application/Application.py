@@ -1,4 +1,5 @@
 from Q4 import Q4
+from Q5 import Q5
 # acts as a facade
 class Organizer(object):
 
@@ -11,6 +12,9 @@ class Organizer(object):
     def runQ(qNumber):
         if(qNumber == 4):
             Q4.query()
+            return
+        if (qNumber == 5):
+            Q5.query()
             return
         print "needs to be implemented"
 
