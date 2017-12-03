@@ -23,6 +23,7 @@ class Organizer(object):
             return
         if (qNumber == 3):
             Q3.query()
+            Q3.visualize("query3.csv")
             return
         if(qNumber == 4):
             Q4.query()

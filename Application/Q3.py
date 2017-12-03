@@ -1,6 +1,9 @@
 from Question import Question
 import mysql.connector
 import os.path
+import collections
+import matplotlib.pyplot as plt
+import numpy as np
 
 class Q3(Question):
     @staticmethod
@@ -27,3 +30,55 @@ class Q3(Question):
 
             out.close()
         print 'Finished'
+
+    @staticmethod
+    def process(csv):
+        l1 = collections.defaultdict(list)
+        with open(csv, 'r') as f:
+            for line in f.readlines():
+                data = line.split(',')
+                l1[data[0]].append((data[1],data[2],data[3].rstrip()))
+        pilotAndSeasonsRan = collections.defaultdict(list)
+        for show in l1.keys():
+            l1[show].sort(key = lambda tup: tup[0]) #sort episodes by season
+            if len(l1[show]) > 20:
+                first = None
+                curr = None
+                nOfSeasons = 1
+                for episode in l1[show]:
+                    if first == None:
+                        first = episode
+                    prev = curr
+                    curr = episode
+                    if prev != None and prev[0] != curr[0]:
+                        nOfSeasons += 1.0
+                if nOfSeasons < 13:
+                    pilotAndSeasonsRan[show].append((first[2],nOfSeasons))
+        return pilotAndSeasonsRan
+
+
+    @staticmethod
+    def visualize(csv):
+        data = Q3.process(csv)
+        x = []
+        y = []
+        for show in data.keys():
+            if len(data[show][0]) > 1:
+                x.append(float(data[show][0][0]))
+                y.append(int(data[show][0][1])) 
+        heatmap, xedges, yedges = np.histogram2d(x, y, bins=12)
+        extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+
+        plt.clf()
+        plt.imshow(heatmap.T, extent=extent, origin='lower')
+        plt.xlabel("Pilot Episode Rating")
+        plt.ylabel("Number of Seasons Aired")
+        plt.show()
+
+
+
+
+
+
+
+
