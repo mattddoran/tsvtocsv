@@ -1,10 +1,9 @@
-import scipy.stats
-
 from Question import Question
 import mysql.connector
 import os.path
 import collections
 import matplotlib.pyplot as plt
+import numpy as np
 
 class Q2(Question):
     @staticmethod
@@ -60,12 +59,20 @@ class Q2(Question):
     @staticmethod
     def visualize(csv):
         x, y = Q2.process(csv)
-        plt.scatter(x, y, marker=".")
+        # plt.scatter(x, y, marker=".")
+        # plt.xlabel("Previus Number of Movies Directed by Director")
+        # plt.ylabel("Average Movie Rating")
+        # #line = scipy.stats.np.arange(10)
+        #
+        # #plt.plot(line * p[0], color="red")
+        # plt.show()
+
+        heatmap, xedges, yedges = np.histogram2d(x, y, bins=100)
+        extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+
+        plt.clf()
+        plt.imshow(heatmap.T, extent=extent, origin='lower')
         plt.xlabel("Previus Number of Movies Directed by Director")
         plt.ylabel("Average Movie Rating")
-        p = scipy.stats.pearsonr(x, y)
-        #line = scipy.stats.np.arange(10)
-
-        #plt.plot(line * p[0], color="red")
         plt.show()
 
