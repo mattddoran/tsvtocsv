@@ -19,6 +19,7 @@ class Organizer(object):
             return
         if (qNumber == 2):
             Q2.query()
+            Q2.process("query2.csv")
             return
         if (qNumber == 3):
             Q3.query()
