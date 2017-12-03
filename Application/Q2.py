@@ -1,8 +1,10 @@
+import scipy.stats
+
 from Question import Question
 import mysql.connector
 import os.path
 import collections
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 class Q2(Question):
     @staticmethod
@@ -40,3 +42,30 @@ class Q2(Question):
                     #id: [year, rating]
                     directorShows[data[0]].append((data[1],data[2].rstrip()))
             f.close()
+
+        x = []
+        y = []
+        for director in directorShows.keys():
+            directorShows[director].sort(key=lambda tup: tup[0])  # sort by year to rank
+            count = 0
+            #print director
+
+            for info in directorShows[director]:
+                #print count, info[0], info[1]
+                x.append(count)
+                y.append(float(info[1])) #rating of the show
+                count += 1
+        return x, y
+
+    @staticmethod
+    def visualize(csv):
+        x, y = Q2.process(csv)
+        plt.scatter(x, y, marker=".")
+        plt.xlabel("Previus Number of Movies Directed by Director")
+        plt.ylabel("Average Movie Rating")
+        p = scipy.stats.pearsonr(x, y)
+        #line = scipy.stats.np.arange(10)
+
+        #plt.plot(line * p[0], color="red")
+        plt.show()
+
