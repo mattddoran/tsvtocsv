@@ -29,3 +29,7 @@ class Q2(Question):
 
             out.close()
         print 'Finished'
+
+    @staticmethod
+    def process(csv):
+        print 'implement'
