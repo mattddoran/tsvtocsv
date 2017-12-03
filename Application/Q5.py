@@ -2,6 +2,8 @@ from Question import Question
 import mysql.connector
 import os.path
 import collections
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 class Q5(Question):
@@ -20,7 +22,7 @@ class Q5(Question):
             out = open(fname1, "w")
             for (id, gross, castLikes, budget) in cursor:
                 # convert entire line to csv
-                out.write("{},{},{}\n".format(id, gross, castLikes, budget))
+                out.write("{},{},{},{}\n".format(id, gross, castLikes, budget))
 
             out.close()
         fname2 = "query5_2.csv"
@@ -48,13 +50,14 @@ class Q5(Question):
 
     @staticmethod
     def process(csv):
-        x = []  # budget 1
+        x = []  # budget 3
         y = []  # cast like 2
-        z = []  # gross 3
+        z = []  # gross 1
         with open(csv, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
-                if len(data) == 4 and data[1] != "None" and data[2] != "None" and data[3] != "None":
+                if len(data) == 4 and data[1] != "None" and data[2] != "None" and int(data[2]) < 200000 and data[3] != "None" and int(data[3]) < 300000000:
+                    print "inside"
                     z.append(int(data[1]))
                     y.append(int(data[2]))
                     x.append(int(data[3]))
@@ -64,6 +67,14 @@ class Q5(Question):
     @staticmethod
     def visualize(csv):
         x, y, z = Q5.process(csv)
+        plt.scatter(x, z, marker=".")
+        plt.xlabel("budget")
+        plt.ylabel("gross")
+        plt.show()
+        plt.scatter(y, z, marker=".")
+        plt.xlabel("cast likes")
+        plt.ylabel("gross")
+        plt.show()
 
 
     @staticmethod
