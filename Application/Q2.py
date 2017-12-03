@@ -37,7 +37,7 @@ class Q2(Question):
         with open(csv, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
-                if data[1] != "None" or data[2] != "None":
+                if data[1] != "None" and data[2] != "None":
                     #id: [year, rating]
                     directorShows[data[0]].append((data[1],data[2].rstrip()))
             f.close()
