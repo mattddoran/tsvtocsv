@@ -1,12 +1,13 @@
 from Question import Question
 import mysql.connector
 import os.path
+import collections
 
 
 class Q5(Question):
     @staticmethod
     def query():
-        fname1 = "query5_1.csv"
+        fname1 = "query51.csv"
         if os.path.isfile(fname1):
             print 'already ran query 1'
         else:
@@ -44,3 +45,50 @@ class Q5(Question):
 
             out.close()
         print 'Finished'
+
+    @staticmethod
+    def process(csv):
+        x = []  # budget 1
+        y = []  # cast like 2
+        z = []  # gross 3
+        with open(csv, "r") as f:
+            for line in f.readlines():
+                data = line.split(",")
+                if len(data) == 4 and data[1] != "None" and data[2] != "None" and data[3] != "None":
+                    z.append(int(data[1]))
+                    y.append(int(data[2]))
+                    x.append(int(data[3]))
+            f.close()
+        return x,y,z
+
+    @staticmethod
+    def visualize(csv):
+        x, y, z = Q5.process(csv)
+
+
+    @staticmethod
+    def processDir(csv):
+        directorShows = collections.defaultdict(list)
+        with open(csv, "r") as f:
+            for line in f.readlines():
+                data = line.split(",")
+                if data[1] != "None" or data[2] != "None":
+                    # id: [year, rating]
+                    directorShows[data[0]].append((data[1], data[2].rstrip()))
+            f.close()
+
+        x = []
+        y = []
+        for director in directorShows.keys():
+            directorShows[director].sort(key=lambda tup: tup[0])  # sort by year to rank
+            count = 0
+            # print director
+
+            for info in directorShows[director]:
+                # print count, info[0], info[1]
+                x.append(count)
+                y.append(float(info[1]))  # rating of the show
+                count += 1
+        return x, y
+
+
