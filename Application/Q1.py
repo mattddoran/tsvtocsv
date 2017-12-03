@@ -2,6 +2,9 @@ from Question import Question
 import mysql.connector
 import os.path
 import collections
+import matplotlib.pyplot as plt
+from scipy.stats.stats import pearsonr
+import numpy as np
 
 class Q1(Question):
     @staticmethod
@@ -31,11 +34,50 @@ class Q1(Question):
 
     @staticmethod
     def process(csv):
-        l1 = collections.defaultdict(list)
+        shows = collections.defaultdict(list)
         with open(csv, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
                 if data[1] != "None":
-                    l1[data[0]].append((data[1],data[2],data[3].rstrip()))
+                    shows[data[0]].append((data[1],data[2],data[3].rstrip()))
             f.close()
-        print l1
+        avgAndFinale = collections.defaultdict(list)
+        for show in shows.keys():
+            total = 0
+            eps = 0
+            finale = None
+            for episode in shows[show]:
+                finale = episode
+                total += float(episode[2])
+                eps += 1.0
+            if round(total/eps, 2) != float(finale[2]):
+                avgAndFinale[show] = (round(total/eps, 2), float(finale[2]))
+        print avgAndFinale
+        print len(avgAndFinale)
+        return avgAndFinale
+
+    @staticmethod
+    def visualize(csv):
+        avgAndFinale = Q1.process(csv)
+        x = []
+        y = []
+        for show in avgAndFinale.keys():
+            x.append(avgAndFinale[show][0])
+            y.append(avgAndFinale[show][1])
+
+        plt.scatter(x,y, marker=".")
+        plt.xlabel("Average Episode Rating")
+        plt.ylabel("Season Finale Rating")
+        p = pearsonr(x,y)
+        line = np.arange(10)
+
+        plt.plot(line * p[0], color="red")
+        plt.show()
+
+
+
+
+
+
+
+

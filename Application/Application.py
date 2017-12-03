@@ -14,7 +14,7 @@ class Organizer(object):
     def runQ(qNumber):
         if (qNumber == 1):
             Q1.query()
-            Q1.process("query1.csv")
+            Q1.visualize("query1.csv")
             return
         if (qNumber == 3):
             Q3.query()
