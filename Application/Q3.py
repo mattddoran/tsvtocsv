@@ -53,7 +53,22 @@ class Q3(Question):
                     if prev != None and prev[0] != curr[0]:
                         nOfSeasons += 1.0
                 if nOfSeasons < 13:
-                    pilotAndSeasonsRan[show].append((first[2],nOfSeasons))
+                    pilotAndSeasonsRan[show].append([first[2],nOfSeasons])
+        normalized = collections.defaultdict(int)
+        # for show in pilotAndSeasonsRan.keys(): # normalize
+        #     print show[0]
+        #     print show[1]
+        #     print round(float(pilotAndSeasonsRan[show][0][0]),0)
+        #     print int(pilotAndSeasonsRan[show][0][1])
+        #     normalized[round(float(pilotAndSeasonsRan[show][0][0]),0)] += round(float(pilotAndSeasonsRan[show][0][1]),0)
+
+        # print normalized
+
+        # for show in pilotAndSeasonsRan.keys():
+        #     #print int(pilotAndSeasonsRan[show][0][1])
+        #     #print normalized[int(pilotAndSeasonsRan[show][0][1])]-1
+
+        #     pilotAndSeasonsRan[show][0][1] = round(pilotAndSeasonsRan[show][0][1]/normalized[round(float(pilotAndSeasonsRan[show][0][0]),0)],4)
         return pilotAndSeasonsRan
 
 
@@ -66,7 +81,7 @@ class Q3(Question):
             if len(data[show][0]) > 1:
                 x.append(float(data[show][0][0]))
                 y.append(int(data[show][0][1])) 
-        heatmap, xedges, yedges = np.histogram2d(x, y, bins=12)
+        heatmap, xedges, yedges = np.histogram2d(x, y, bins=12, normed=True)
         extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
 
         plt.clf()
