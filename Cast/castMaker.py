@@ -9,7 +9,9 @@ def main():
         with open("BIG_FILE_cast.tsv", "r") as f:
                 iDWriter = 6
                 iDDirector = 7
-                for line in f.readlines()[100000:200000]:
+                count = 0;
+                for line in f.readlines()[550000:]:
+                        count = count +1
                         line1 = line.split("\t")
                         castID = line1[0][2:]
                         out2.write("{}\n".format(castID))
@@ -20,13 +22,14 @@ def main():
                                 director = director[2:]
                                 if num > 2:
                                         out1.write("{},{},{}\n".format(castID,director,iDDirector))
-                        for writer in writers:
-                                num = len(writer) - 1
-                                writer = writer[2:num]
-                                if num > 2:
-                                        out1.write("{},{},{}\n".format(castID,writer,iDWriter))
+                        # for writer in writers:
+                        #         num = len(writer) - 1
+                        #         writer = writer[2:num]
+                        #         if num > 2:
+                        #                 out1.write("{},{},{}\n".format(castID,writer,iDWriter))
 
 
                 out1.close()
+                print count
 
 main()
