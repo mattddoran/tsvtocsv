@@ -2,7 +2,7 @@ from Question import Question
 import mysql.connector
 import os.path
 import collections
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 class Q4(Question):
     @staticmethod
