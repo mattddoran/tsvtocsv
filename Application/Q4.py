@@ -31,18 +31,17 @@ class Q4(Question):
         print 'Finished'
 
     @staticmethod
-    def process(csv):
+    def process(csv): #convert csv populated by query and return a list with coordinates ready to be plotted
         l1 = collections.defaultdict(list)
-        #l1 = {"Documentary":[],"Short":[],"Animation":[], "Comedy":[], "Romance":[], "Sport":[], "News":[], "Drama":[], "Fantasy":[], }
-        with open(csv, 'r') as f:
-            for line in f.readlines():
+        with open(csv, 'r') as f: # open csv populated through query
+            for line in f.readlines(): #line by line...
                 data = line.split(',')
                 if data[1] != "None": #Ignore years recorded as "None" and populate genre dictionary with year and number of titles
                     l1[data[0]].append((data[1], data[2].rstrip()))
                     #l1[data[0]].append(data[2].rstrip())
             f.close()
         popularGenres = collections.defaultdict(int)
-        for genre in l1.keys():
+        for genre in l1.keys(): # Record frequencies of each genre
             for year in l1[genre]:
                 popularGenres[genre] += int(year[1])
 
@@ -54,19 +53,19 @@ class Q4(Question):
         return l1
 
     @staticmethod
-    def visualize(csv):
+    def visualize(csv): #create line graph of all genres 
         l1 = Q4.process(csv)
         genres = []
         for genre in l1.keys():
-            genres.append(genre)
+            genres.append(genre) #record genre names for annotation
             x = []
             y = []
             for year in l1[genre]:
-                if int(year[0]) < 2017 and int(year[0]) > 1960:
+                if int(year[0]) < 2017 and int(year[0]) > 1960: #ignore 2017 as it only has a subset of data and discard genre data older than 1960
                     x.append(int(year[0]))
                     y.append(int(year[1]))
             plt.plot(x,y) # (Year, Number of Titles)
-        plt.legend(genres, loc="upper left")
+        plt.legend(genres, loc="upper left") # annotate genres being displayed
 
         plt.show()
 
