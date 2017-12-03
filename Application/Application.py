@@ -1,4 +1,5 @@
 from Q1 import Q1
+from Q2 import Q2
 from Q3 import Q3
 from Q4 import Q4
 from Q5 import Q5
@@ -15,6 +16,9 @@ class Organizer(object):
         if (qNumber == 1):
             Q1.query()
             Q1.process("query1.csv")
+            return
+        if (qNumber == 2):
+            Q2.query()
             return
         if (qNumber == 3):
             Q3.query()
