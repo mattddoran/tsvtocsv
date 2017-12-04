@@ -5,6 +5,9 @@ import collections
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Is there a correlation between the number of movies a director has previously directed
+# and the success of the movie based on average rating?
+
 class Q2(Question):
     @staticmethod
     def query():

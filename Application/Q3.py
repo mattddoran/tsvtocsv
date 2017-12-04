@@ -5,6 +5,9 @@ import collections
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Based off of a series pilot episode, can we visualize/predict what season the show 
+# will air for?
+
 class Q3(Question):
     @staticmethod
     def query():

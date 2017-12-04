@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 from scipy.stats.stats import pearsonr
 import numpy as np
 
+# Based on previous ratings of a TV series, can we accurately predict what the series
+# finale rating will be?
+
 class Q1(Question):
     @staticmethod
     def query():
