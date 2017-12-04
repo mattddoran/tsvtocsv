@@ -10,10 +10,13 @@ import scipy
 
 
 class Q5(Question):
-    @staticmethod
-    def query():
-        fname1 = "query51.csv"
-        if os.path.isfile(fname1):
+    def __init__(self, queryFile1, queryFile2):
+        self.queryFile1 = queryFile1
+        self.queryFile2 = queryFile2
+
+
+    def query(self):
+        if os.path.isfile(self.queryFile1):
             print 'already ran query 1'
         else:
             print 'need to run query 1'
@@ -24,14 +27,13 @@ class Q5(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query1)
 
-            out = open(fname1, "w")
+            out = open(self.queryFile1, "w")
             for (id, gross, castLikes, budget) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{},{}\n".format(id, gross, castLikes, budget))
 
             out.close()
-        fname2 = "query5_2.csv"
-        if os.path.isfile(fname2):
+        if os.path.isfile(self.queryFile2):
             print 'already ran query 2'
         else:
             print 'need to run query 2'
@@ -45,7 +47,7 @@ class Q5(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
-            out = open(fname2, "w")
+            out = open(self.queryFile2, "w")
             for (personID, year, rating, idTitle) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{},{}\n".format(personID, year, rating, idTitle))
@@ -53,13 +55,12 @@ class Q5(Question):
             out.close()
         # print 'Finished'
 
-    @staticmethod
-    def process(csv):
+    def process(self):
         i = []  #index
         x = []  # budget 3
         y = []  # cast like 2
         z = []  # gross 1
-        with open(csv, "r") as f:
+        with open(self.queryFile1, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
                 if len(data) == 4 and data[1] != "None" and data[2] != "None" and int(data[2]) < 200000 and data[3] != "None" and int(data[3]) < 300000000:
@@ -70,10 +71,9 @@ class Q5(Question):
             f.close()
         return i,x,y,z
 
-    @staticmethod
-    def visualize(csv):
-        i, x, y, z = Q5.process(csv)
-        i_2, x_1, z_1 = Q5.processDir(csv)
+    def visualize(self):
+        i, x, y, z = self.process()
+        i_2, x_1, z_1 = self.processDir()
         gross_d = []
         budget_d = []
         for inc in range(0,len(i_2)):
@@ -135,18 +135,16 @@ class Q5(Question):
         # print popt, "pcov: ", pcov
 
 
-
-    @staticmethod
-    def processDir(csv):
+    def processDir(self):
         relevantIds = set()
-        with open(csv, "r") as f:
+        with open(self.queryFile1, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
                 if len(data) == 4 and data[1] != "None" and data[2] != "None" and int(data[2]) < 200000 and data[3] != "None" and int(data[3]) < 300000000:
                     relevantIds.add(int(data[0]))
             f.close()
         directorShows = collections.defaultdict(list)
-        with open("query5_2.csv", "r") as f:
+        with open(self.queryFile2, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
                 #print int(data[3]) in relevantIds

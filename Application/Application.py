@@ -12,7 +12,7 @@ class Organizer(object):
         a.append(Q2("query2.csv"))
         a.append(Q3("query3.csv"))
         a.append(Q4("query4.csv"))
-        a.append(Q5(5))
+        a.append(Q5("query51.csv","query5_2.csv"))
         self.a = a
 
     def runQ(self,qNumber):

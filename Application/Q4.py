@@ -8,10 +8,8 @@ import matplotlib.pyplot as plt
 # than they used to be?
 
 class Q4(Question):
-    @staticmethod
-    def query():
-        fname = "query4.csv"
-        if os.path.isfile(fname):
+    def query(self):
+        if os.path.isfile(self.queryFile):
             print 'already ran query'
         else:
             print 'need to run query'
@@ -25,17 +23,16 @@ class Q4(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
-            out = open(fname, "w")
+            out = open(self.queryFile, "w")
             for (genre, year, count) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{}\n".format(genre, year, count))
 
             out.close()
 
-    @staticmethod
-    def process(csv): #convert csv populated by query and return a list with coordinates ready to be plotted
+    def process(self): #convert csv populated by query and return a list with coordinates ready to be plotted
         l1 = collections.defaultdict(list)
-        with open(csv, 'r') as f: # open csv populated through query
+        with open(self.queryFile, 'r') as f: # open csv populated through query
             for line in f.readlines(): #line by line...
                 data = line.split(',')
                 if data[1] != "None": #Ignore years recorded as "None" and populate genre dictionary with year and number of titles
@@ -48,15 +45,14 @@ class Q4(Question):
                 popularGenres[genre] += int(year[1])
 
         popularGenres = sorted(popularGenres.items(), key=lambda(k,v): v) #Sort by most popular genres
-        print popularGenres
+        #print popularGenres
         for genre in popularGenres[:20]: #remove 20 least popular genres
             del l1[genre[0]]
 
         return l1
 
-    @staticmethod
-    def visualize(csv): #create line graph of all genres 
-        l1 = Q4.process(csv)
+    def visualize(self): #create line graph of all genres
+        l1 = self.process()
         genres = []
         for genre in l1.keys():
             genres.append(genre) #record genre names for annotation
