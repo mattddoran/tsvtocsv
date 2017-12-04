@@ -8,7 +8,8 @@ class Organizer(object):
 
     @staticmethod
     def init():
-        a = "nothing going on yet"
+        a = []
+        q1 = Q1()
 
 
     @staticmethod
