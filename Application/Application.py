@@ -6,35 +6,20 @@ from Q5 import Q5
 # acts as a facade
 class Organizer(object):
 
-    @staticmethod
-    def init():
+    def __init__(self):
         a = []
-        q1 = Q1()
+        a.append(Q1("query1.csv"))
+        a.append(Q2(2))
+        a.append(Q3(3))
+        a.append(Q4(4))
+        a.append(Q5(5))
+        self.a = a
 
-
-    @staticmethod
-    def runQ(qNumber):
-        if (qNumber == 1):
-            Q1.query()
-            Q1.visualize("query1.csv")
-            return
-        if (qNumber == 2):
-            Q2.query()
-            Q2.visualize("query2.csv")
-            return
-        if (qNumber == 3):
-            Q3.query()
-            Q3.visualize("query3.csv")
-            return
-        if(qNumber == 4):
-            Q4.query()
-            Q4.visualize("query4.csv")
-            return
-        if (qNumber == 5):
-            Q5.query()
-            Q5.visualize("query51.csv")
-            return
-        print "needs to be implemented"
+    def runQ(self,qNumber):
+        qNumber -= 1
+        if (qNumber < 5 and qNumber >= 0):
+            self.a[qNumber].visualize()
+        print "That question number does not exsist"
 
 
 #Should take care of the user choosing the question
@@ -49,8 +34,8 @@ def menu():
 if __name__ == '__main__':
     state = menu()
     while not(state == -1):
-        Organizer.init()
-        Organizer.runQ(state)
+        organizer = Organizer()
+        organizer.runQ(state)
         state = menu()
 
 

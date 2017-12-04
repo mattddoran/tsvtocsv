@@ -10,10 +10,9 @@ import numpy as np
 # finale rating will be?
 
 class Q1(Question):
-    @staticmethod
-    def query():
-        fname = "query1.csv"
-        if os.path.isfile(fname):
+
+    def query(self):
+        if os.path.isfile(self.queryFile):
             print 'already ran query'
         else:
             print 'need to run query'
@@ -27,17 +26,16 @@ class Q1(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
-            out = open(fname, "w")
+            out = open(self.queryFile, "w")
             for (idParent, season, episode, rating) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{},{}\n".format(idParent, season, episode, rating))
 
             out.close()
 
-    @staticmethod
-    def process(csv): # process csv from query and return data ready to be visualized
+    def process(self): # process csv from query and return data ready to be visualized
         shows = collections.defaultdict(list)
-        with open(csv, "r") as f: #open csv populated from query
+        with open(self.queryFile, "r") as f: #open csv populated from query
             for line in f.readlines(): #line by line
                 data = line.split(",")
                 if data[1] != "None": #ignore shows that don't include episode or season number
@@ -56,9 +54,8 @@ class Q1(Question):
                 avgAndFinale[show] = (round(total/eps, 2), float(finale[2])) #record tuple(average ep rating, finale rating)
         return avgAndFinale
 
-    @staticmethod
-    def visualize(csv): # Create scatterplot of all of the shows and display pearson coefficient line
-        avgAndFinale = Q1.process(csv)
+    def visualize(self): # Create scatterplot of all of the shows and display pearson coefficient line
+        avgAndFinale = self.process()
         x = []
         y = []
         for show in avgAndFinale.keys(): #populate lists for scatterplot

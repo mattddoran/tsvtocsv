@@ -4,5 +4,5 @@ import mysql.connector
 #Inherits these three classes as interfaces
 class Question(Visualization,Analysis,Query):
 
-    def __init__(self, qNumber):
-        print "Initializing Question: ", qNumber
+    def __init__(self, queryFile):
+        self.queryFile = queryFile
