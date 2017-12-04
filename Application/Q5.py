@@ -4,6 +4,7 @@ import os.path
 import collections
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import stats
 
 
 class Q5(Question):
@@ -14,7 +15,9 @@ class Q5(Question):
             print 'already ran query 1'
         else:
             print 'need to run query 1'
-            query1 = ("select * from metadata")
+            query1 = ("select Title_idTitle, gross, castTotalFBLikes,budget "
+                      "from title cross join metadata "
+                      "where startYear > 1950 and idTitle = Title_idTitle;")
             cnx = mysql.connector.connect(user='root', password='Rrevolution@1', host='127.0.0.1', database='mydb2')
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query1)
@@ -31,7 +34,7 @@ class Q5(Question):
         else:
             print 'need to run query 2'
             query = (
-                "select cast_has_person_with_profession.Person_idPerson, mydb2.title.startYear, rating.averageRating "
+                "select cast_has_person_with_profession.Person_idPerson, mydb2.title.startYear, rating.averageRating, mydb2.title.idTitle "
                 "from mydb2.cast_has_person_with_profession cross join mydb2.title cross join mydb2.rating "
                 "where mydb2.cast_has_person_with_profession.Cast_idCast = mydb2.title.idTitle and Professions_idProfession = 7 "
                 "and mydb2.rating.Title_idTitle = mydb2.title.idTitle;"
@@ -41,15 +44,16 @@ class Q5(Question):
             cursor.execute(query)
 
             out = open(fname2, "w")
-            for (personID, year, rating) in cursor:
+            for (personID, year, rating, idTitle) in cursor:
                 # convert entire line to csv
-                out.write("{},{},{}\n".format(personID, year, rating))
+                out.write("{},{},{},{}\n".format(personID, year, rating, idTitle))
 
             out.close()
         print 'Finished'
 
     @staticmethod
     def process(csv):
+        i = []  #index
         x = []  # budget 3
         y = []  # cast like 2
         z = []  # gross 1
@@ -57,16 +61,47 @@ class Q5(Question):
             for line in f.readlines():
                 data = line.split(",")
                 if len(data) == 4 and data[1] != "None" and data[2] != "None" and int(data[2]) < 200000 and data[3] != "None" and int(data[3]) < 300000000:
-                    print "inside"
+                    i.append(int(data[0]))
                     z.append(int(data[1]))
                     y.append(int(data[2]))
                     x.append(int(data[3]))
             f.close()
-        return x,y,z
+        return i,x,y,z
 
     @staticmethod
     def visualize(csv):
-        x, y, z = Q5.process(csv)
+        i, x, y, z = Q5.process(csv)
+        i_2, x_1, z_1 = Q5.processDir(csv)
+        gross_d = []
+        budget_d = []
+        for inc in range(0,len(i_2)):
+            idT = i_2[inc]
+            for jinc in range(0,len(i)):
+                if(i[jinc] == idT):
+                    gross_d.append(z[jinc])
+                    
+                    break
+        print len(gross_d), "should be", len(i_2)
+        plt.scatter(x_1, gross_d, marker=".")
+        plt.xlabel("director xp")
+        plt.ylabel("gross")
+        plt.show()
+        plt.scatter(x_1, z_1, marker=".")
+        plt.xlabel("director xp")
+        plt.ylabel("rating")
+        plt.show()
+        print "carl1", len(x)
+        print "carl2", len(x_1)
+        x = stats.zscore(np.array(x))
+        y = stats.zscore(np.array(y))
+        #z = stats.zscore(np.array(z))
+        sumx_y = []
+        for i in range(0,len(x)):
+            sumx_y.append(x[i] + y[i])
+        plt.scatter(sumx_y, z, marker=".")
+        plt.xlabel("budget and likes")
+        plt.ylabel("gross")
+        plt.show()
         plt.scatter(x, z, marker=".")
         plt.xlabel("budget")
         plt.ylabel("gross")
@@ -79,15 +114,24 @@ class Q5(Question):
 
     @staticmethod
     def processDir(csv):
-        directorShows = collections.defaultdict(list)
+        relevantIds = set()
         with open(csv, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
-                if data[1] != "None" or data[2] != "None":
-                    # id: [year, rating]
-                    directorShows[data[0]].append((data[1], data[2].rstrip()))
+                if len(data) == 4 and data[1] != "None" and data[2] != "None" and int(data[2]) < 200000 and data[3] != "None" and int(data[3]) < 300000000:
+                    relevantIds.add(int(data[0]))
             f.close()
-
+        directorShows = collections.defaultdict(list)
+        with open("query5_2.csv", "r") as f:
+            for line in f.readlines():
+                data = line.split(",")
+                #print int(data[3]) in relevantIds
+                if data[1] != "None" and data[2] != "None":
+                    # id: [year, rating]
+                    #print "here"
+                    directorShows[data[0]].append((data[1],data[2],data[3].rstrip()))
+            f.close()
+        i = []
         x = []
         y = []
         for director in directorShows.keys():
@@ -97,9 +141,11 @@ class Q5(Question):
 
             for info in directorShows[director]:
                 # print count, info[0], info[1]
-                x.append(count)
-                y.append(float(info[1]))  # rating of the show
+                if int(info[2]) in relevantIds:
+                    i.append(int(info[2]))
+                    x.append(count)
+                    y.append(float(info[1]))  # rating of the show
                 count += 1
-        return x, y
+        return i, x, y
 
 
