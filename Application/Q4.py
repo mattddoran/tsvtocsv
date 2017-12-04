@@ -28,7 +28,6 @@ class Q4(Question):
                 out.write("{},{},{}\n".format(genre, year, count))
 
             out.close()
-        print 'Finished'
 
     @staticmethod
     def process(csv): #convert csv populated by query and return a list with coordinates ready to be plotted

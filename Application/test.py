@@ -4,6 +4,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import mysql.connector
 from Question import Question
+from scipy.optimize import curve_fit
+import scipy
 
 def run():
     m = 0
@@ -63,9 +65,9 @@ def queryTest():
 if __name__ == '__main__':
     # run()
 
-    var = Question("Qusetion1",{2,3,4})
-    queryTest()
-    coolBreeze()
+    # var = Question("Qusetion1",{2,3,4})
+    # queryTest()
+    # coolBreeze()
     #var.doSome()
     #var.createImage()
     # Fixing random state for reproducibility
@@ -76,3 +78,19 @@ if __name__ == '__main__':
     # ax.plot(10 * np.random.randn(100), 10 * np.random.randn(100), 'o')
     # ax.set_title('Using hyphen instead of Unicode minus')
     # plt.show()
+
+    def fn(x, a, b, c):
+        return a + b * x[0] + c * x[1]
+
+
+    # y(x0,x1) data:
+    #    x0=0 1 2
+    # ___________
+    # x1=0 |0 1 2
+    # x1=1 |1 2 3
+    # x1=2 |2 3 4
+
+    x = scipy.array([[0, 1, 2, 0, 1, 2, 0, 1, 2, ], [0, 0, 0, 1, 1, 1, 2, 2, 2]])
+    y = scipy.array([0, 1, 2, 1, 2, 3, 2, 3, 4])
+    popt, pcov = curve_fit(fn, x, y)
+    print popt, pcov

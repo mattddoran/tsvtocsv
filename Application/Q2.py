@@ -29,7 +29,6 @@ class Q2(Question):
                 out.write("{},{},{}\n".format(personID, year, rating))
 
             out.close()
-        print 'Finished'
 
     @staticmethod
     def process(csv):
@@ -59,20 +58,20 @@ class Q2(Question):
     @staticmethod
     def visualize(csv):
         x, y = Q2.process(csv)
-        # plt.scatter(x, y, marker=".")
+        plt.scatter(x, y, marker=".")
+        plt.xlabel("Previus Number of Movies Directed by Director")
+        plt.ylabel("Average Movie Rating (0 - 10)")
+        #line = scipy.stats.np.arange(10)
+
+        #plt.plot(line * p[0], color="red")
+        plt.show()
+
+        # heatmap, xedges, yedges = np.histogram2d(x, y, bins=100)
+        # extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+        #
+        # plt.clf()
+        # plt.imshow(heatmap.T, extent=extent, origin='lower')
         # plt.xlabel("Previus Number of Movies Directed by Director")
         # plt.ylabel("Average Movie Rating")
-        # #line = scipy.stats.np.arange(10)
-        #
-        # #plt.plot(line * p[0], color="red")
         # plt.show()
-
-        heatmap, xedges, yedges = np.histogram2d(x, y, bins=100)
-        extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-
-        plt.clf()
-        plt.imshow(heatmap.T, extent=extent, origin='lower')
-        plt.xlabel("Previus Number of Movies Directed by Director")
-        plt.ylabel("Average Movie Rating")
-        plt.show()
 

@@ -30,7 +30,6 @@ class Q1(Question):
                 out.write("{},{},{},{}\n".format(idParent, season, episode, rating))
 
             out.close()
-        print 'Finished'
 
     @staticmethod
     def process(csv): # process csv from query and return data ready to be visualized

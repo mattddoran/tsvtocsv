@@ -5,6 +5,8 @@ import collections
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
+from scipy.optimize import curve_fit
+import scipy
 
 
 class Q5(Question):
@@ -49,7 +51,7 @@ class Q5(Question):
                 out.write("{},{},{},{}\n".format(personID, year, rating, idTitle))
 
             out.close()
-        print 'Finished'
+        # print 'Finished'
 
     @staticmethod
     def process(csv):
@@ -81,17 +83,18 @@ class Q5(Question):
                     gross_d.append(z[jinc])
                     budget_d.append(x[jinc])
                     break
-        print len(gross_d), "should be", len(i_2)
+        # print len(gross_d), "should be", len(i_2)
         plt.scatter(x_1, gross_d, marker=".")
-        plt.xlabel("director xp")
-        plt.ylabel("gross")
+        plt.xlabel("Previos Films Directed by Movie Director")
+        plt.ylabel("Gross Product $100 million")
+        plt.title("1970 on Data")
         plt.show()
-        plt.scatter(x_1, z_1, marker=".")
-        plt.xlabel("director xp")
-        plt.ylabel("rating")
-        plt.show()
-        print "carl1", len(x)
-        print "carl2", len(x_1)
+        # plt.scatter(x_1, z_1, marker=".")
+        # plt.xlabel("director xp")
+        # plt.ylabel("rating")
+        # plt.show()
+        # print "carl1", len(x)
+        # print "carl2", len(x_1)
         x = stats.zscore(np.array(x))
         y = stats.zscore(np.array(y))
         #z = stats.zscore(np.array(z))
@@ -99,16 +102,19 @@ class Q5(Question):
         for i in range(0,len(x)):
             sumx_y.append(x[i] + y[i])
         plt.scatter(sumx_y, z, marker=".")
-        plt.xlabel("budget and likes")
-        plt.ylabel("gross")
+        plt.xlabel("Previos Films Directed by Movie Director")
+        plt.xlabel("Budget Z-score + Total Cast Likes Z-score")
+        plt.ylabel("Gross Product $100 million")
         plt.show()
         plt.scatter(x, z, marker=".")
-        plt.xlabel("budget")
-        plt.ylabel("gross")
+        plt.xlabel("Previos Films Directed by Movie Director")
+        plt.xlabel("Budget Z-score")
+        plt.ylabel("Gross Product $100 million")
         plt.show()
         plt.scatter(y, z, marker=".")
-        plt.xlabel("cast likes")
-        plt.ylabel("gross")
+        plt.xlabel("Previos Films Directed by Movie Director")
+        plt.xlabel("Cast Likes Z-score")
+        plt.ylabel("Gross Product $100 million")
         plt.show()
         gross_d = stats.zscore(np.array(gross_d))
         budget_d = stats.zscore(np.array(budget_d))
@@ -117,9 +123,17 @@ class Q5(Question):
         for i in range(0,len(i_2)):
             sum_bd.append(budget_d[i] + x_1[i])
         plt.scatter(sum_bd, gross_d, marker=".")
-        plt.xlabel("summation")
-        plt.ylabel("gross")
+        plt.xlabel("Previos Films Directed by Movie Director")
+        plt.xlabel("Budget Z-score + Previos Films Directed by Movie Director")
+        plt.ylabel("Gross Product $100 million")
         plt.show()
+        # vars = [[]]
+        # vars.append(budget_d)
+        # vars.append(x_1)
+        # vary = gross_d
+        # popt, pcov = curve_fit(Q5.fn,vars,vary)
+        # print popt, "pcov: ", pcov
+
 
 
     @staticmethod
@@ -158,4 +172,6 @@ class Q5(Question):
                 count += 1
         return i, x, y
 
-
+    @staticmethod
+    def fn(x, const, budget, directorXP):
+        return const + budget*x[0] + directorXP*x[1]

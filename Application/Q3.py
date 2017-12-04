@@ -29,7 +29,6 @@ class Q3(Question):
                 out.write("{},{},{},{}\n".format(idParent, season, episode, rating))
 
             out.close()
-        print 'Finished'
 
     @staticmethod
     def process(csv): #process csv and return list ready to be plotted
