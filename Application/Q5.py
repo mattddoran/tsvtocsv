@@ -17,7 +17,7 @@ class Q5(Question):
             print 'need to run query 1'
             query1 = ("select Title_idTitle, gross, castTotalFBLikes,budget "
                       "from title cross join metadata "
-                      "where startYear > 1950 and idTitle = Title_idTitle;")
+                      "where startYear > 1970 and idTitle = Title_idTitle;")
             cnx = mysql.connector.connect(user='root', password='Rrevolution@1', host='127.0.0.1', database='mydb2')
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query1)
@@ -79,7 +79,7 @@ class Q5(Question):
             for jinc in range(0,len(i)):
                 if(i[jinc] == idT):
                     gross_d.append(z[jinc])
-                    
+                    budget_d.append(x[jinc])
                     break
         print len(gross_d), "should be", len(i_2)
         plt.scatter(x_1, gross_d, marker=".")
@@ -108,6 +108,16 @@ class Q5(Question):
         plt.show()
         plt.scatter(y, z, marker=".")
         plt.xlabel("cast likes")
+        plt.ylabel("gross")
+        plt.show()
+        gross_d = stats.zscore(np.array(gross_d))
+        budget_d = stats.zscore(np.array(budget_d))
+        x_1 = stats.zscore(np.array(x_1))
+        sum_bd = []
+        for i in range(0,len(i_2)):
+            sum_bd.append(budget_d[i] + x_1[i])
+        plt.scatter(sum_bd, gross_d, marker=".")
+        plt.xlabel("summation")
         plt.ylabel("gross")
         plt.show()
 
