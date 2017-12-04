@@ -9,10 +9,8 @@ import numpy as np
 # and the success of the movie based on average rating?
 
 class Q2(Question):
-    @staticmethod
-    def query():
-        fname = "query2.csv"
-        if os.path.isfile(fname):
+    def query(self):
+        if os.path.isfile(self.queryFile):
             print 'already ran query'
         else:
             print 'need to run query'
@@ -26,17 +24,16 @@ class Q2(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
-            out = open(fname, "w")
+            out = open(self.queryFile, "w")
             for (personID, year, rating) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{}\n".format(personID, year, rating))
 
             out.close()
 
-    @staticmethod
-    def process(csv):
+    def process(self):
         directorShows = collections.defaultdict(list)
-        with open(csv, "r") as f:
+        with open(self.queryFile, "r") as f:
             for line in f.readlines():
                 data = line.split(",")
                 if data[1] != "None" and data[2] != "None":
@@ -58,9 +55,8 @@ class Q2(Question):
                 count += 1
         return x, y
 
-    @staticmethod
-    def visualize(csv):
-        x, y = Q2.process(csv)
+    def visualize(self):
+        x, y = self.process()
         plt.scatter(x, y, marker=".")
         plt.xlabel("Previus Number of Movies Directed by Director")
         plt.ylabel("Average Movie Rating (0 - 10)")

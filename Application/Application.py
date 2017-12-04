@@ -9,9 +9,9 @@ class Organizer(object):
     def __init__(self):
         a = []
         a.append(Q1("query1.csv"))
-        a.append(Q2(2))
-        a.append(Q3(3))
-        a.append(Q4(4))
+        a.append(Q2("query2.csv"))
+        a.append(Q3("query3.csv"))
+        a.append(Q4("query4.csv"))
         a.append(Q5(5))
         self.a = a
 
