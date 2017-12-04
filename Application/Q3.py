@@ -9,10 +9,8 @@ import numpy as np
 # will air for?
 
 class Q3(Question):
-    @staticmethod
-    def query():
-        fname = "query3.csv"
-        if os.path.isfile(fname):
+    def query(self):
+        if os.path.isfile(self.queryFile):
             print 'already ran query'
         else:
             print 'need to run query'
@@ -26,17 +24,16 @@ class Q3(Question):
             cursor = cnx.cursor(buffered=True)
             cursor.execute(query)
 
-            out = open(fname, "w")
+            out = open(self.queryFile, "w")
             for (idParent, season, episode, rating) in cursor:
                 # convert entire line to csv
                 out.write("{},{},{},{}\n".format(idParent, season, episode, rating))
 
             out.close()
 
-    @staticmethod
-    def process(csv): #process csv and return list ready to be plotted
+    def process(self): #process csv and return list ready to be plotted
         l1 = collections.defaultdict(list)
-        with open(csv, 'r') as f: #open csv populated through query
+        with open(self.queryFile, 'r') as f: #open csv populated through query
             for line in f.readlines():
                 data = line.split(',')
                 l1[data[0]].append((data[1],data[2],data[3].rstrip())) #dictionary of tv show tconsts to a list of tuples (season, ep, rating)
@@ -73,10 +70,8 @@ class Q3(Question):
         #     pilotAndSeasonsRan[show][0][1] = round(pilotAndSeasonsRan[show][0][1]/normalized[round(float(pilotAndSeasonsRan[show][0][0]),0)],4)
         return pilotAndSeasonsRan
 
-
-    @staticmethod
-    def visualize(csv): #Create a heatmap from the list generated from csv
-        data = Q3.process(csv)
+    def visualize(self): #Create a heatmap from the list generated from csv
+        data = self.process()
         x = []
         y = []
         for show in data.keys():
