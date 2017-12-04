@@ -21,7 +21,9 @@ class Organizer(object):
         qNumber -= 1
         #prevent out of bounds exception
         if (qNumber < len(self.a) and qNumber >= 0):
+            # run the query
             self.a[qNumber].query()
+            # visualize the data from that query
             self.a[qNumber].visualize()
             return
         print "That question number does not exsist"
@@ -30,9 +32,8 @@ class Organizer(object):
 #Should take care of the user choosing the question
 # return question number or -1 for exit
 def menu():
+    # user can enter information to choose question to run
     name = raw_input("Either type the question number you want to run (1-5) or -1 for exit: ")
-    # while not (type(name) == int):
-    #     name = raw_input("Not an integer: ")
     return int(name)
 
 
