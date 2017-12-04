@@ -4,6 +4,9 @@ import os.path
 import collections
 import matplotlib.pyplot as plt
 
+# What are the trends of genres? What genres are currently getting produced more often
+# than they used to be?
+
 class Q4(Question):
     @staticmethod
     def query():
