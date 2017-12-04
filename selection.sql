@@ -38,9 +38,10 @@ delete
 from cast_has_person_with_profession;
 SET SQL_SAFE_UPDATES = 1; */
 
-select * 
-from title
-where idTitle = 9;
+select *
+from cast_has_person_with_profession
+limit 10;
+-- where idTitle = 9;
 
 -- Todo
 /*update deathYear = 1941, 
