@@ -66,9 +66,9 @@ class Q1(Question):
         plt.xlabel("Average Episode Rating")
         plt.ylabel("Season Finale Rating")
         p = pearsonr(x,y) # Pearson' coefficient
-        line = np.arange(10)
+        line = np.arange(11)
 
-        plt.plot(line * p[0]+1, color="red") # Pearson's coefficient line
+        plt.plot(line * p[0]+1.5, color="red") # Pearson's coefficient line
         plt.show()
 
 
