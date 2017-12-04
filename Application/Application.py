@@ -7,6 +7,7 @@ from Q5 import Q5
 class Organizer(object):
 
     def __init__(self):
+        # fill the list with the different question numbers
         a = []
         a.append(Q1("query1.csv"))
         a.append(Q2("query2.csv"))
@@ -16,9 +17,13 @@ class Organizer(object):
         self.a = a
 
     def runQ(self,qNumber):
+        # switch the number to an index
         qNumber -= 1
-        if (qNumber < 5 and qNumber >= 0):
+        #prevent out of bounds exception
+        if (qNumber < len(self.a) and qNumber >= 0):
+            self.a[qNumber].query()
             self.a[qNumber].visualize()
+            return
         print "That question number does not exsist"
 
 

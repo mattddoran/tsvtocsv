@@ -9,6 +9,7 @@ from scipy.optimize import curve_fit
 import scipy
 
 
+# needs two files unlike the other questions (one for each query on the database)
 class Q5(Question):
     def __init__(self, queryFile1, queryFile2):
         self.queryFile1 = queryFile1
