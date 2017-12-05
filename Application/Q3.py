@@ -9,6 +9,7 @@ import numpy as np
 # will air for?
 
 class Q3(Question):
+    #run the query and generate a file to be used by the other methods if the file does not already exsist
     def query(self):
         if os.path.isfile(self.queryFile):
             print 'already ran query'
@@ -54,6 +55,8 @@ class Q3(Question):
                 if nOfSeasons < 13: #exclude odd shows with 30+ seasons to visualize heatmap better
                     pilotAndSeasonsRan[show].append([first[2],nOfSeasons])
         normalized = collections.defaultdict(int)
+        # Here is some code we were trying to implement to normalize the data that we did not get working
+        # Would be a good next step although our current results seem decent
         # for show in pilotAndSeasonsRan.keys(): # normalize
         #     print show[0]
         #     print show[1]

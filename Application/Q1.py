@@ -12,7 +12,7 @@ import numpy as np
 # finale rating will be?
 
 class Q1(Question):
-
+    #run the query and generate a file to be used by the other methods if the file does not already exsist
     def query(self):
         if os.path.isfile(self.queryFile):
             print 'already ran query'

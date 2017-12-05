@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 # than they used to be?
 
 class Q4(Question):
+    #run the query and generate a file to be used by the other methods if the file does not already exsist
     def query(self):
         if os.path.isfile(self.queryFile):
             print 'already ran query'
@@ -64,7 +65,7 @@ class Q4(Question):
                     y.append(int(year[1]))
             plt.plot(x,y) # (Year, Number of Titles)
         plt.legend(genres, loc="upper left") # annotate genres being displayed
-
+        plt.title("Year v Number of Titles Prodcued")
         plt.show()
 
 
