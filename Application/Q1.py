@@ -4,6 +4,8 @@ import os.path
 import collections
 import matplotlib.pyplot as plt
 from scipy.stats.stats import pearsonr
+from sklearn import linear_model, datasets
+from sklearn.metrics import mean_squared_error
 import numpy as np
 
 # Based on previous ratings of a TV series, can we accurately predict what the series
@@ -64,11 +66,24 @@ class Q1(Question):
 
         plt.scatter(x,y, marker=".") # scatterplot
         plt.xlabel("Average Episode Rating")
-        plt.ylabel("Season Finale Rating")
+        plt.ylabel("Series Finale Rating")
         p = pearsonr(x,y) # Pearson' coefficient
-        line = np.arange(11)
+        print p[0]
+        xT = []
+        yT = []
+        for i in x:
+            xT.append([i])
+        for i in y:
+            yT.append([i])  
+        regr = linear_model.LinearRegression()
+        regr.fit(xT,yT) #fit linear regression line
+        y_pred = regr.predict(xT) #predict y values to draw regression line
+        print "linear regression coefficients: " + str(regr.coef_)
+        print "linear regression y-intercept: " + str(regr.intercept_)
+        print "mean squared error: " + str(mean_squared_error(y,y_pred)) #mean squared error
 
-        plt.plot(line * p[0]+1.5, color="red") # Pearson's coefficient line
+        
+        plt.plot(x, y_pred, color="red") # Pearson's coefficient line
         plt.show()
 
 
